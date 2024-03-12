@@ -51,7 +51,7 @@ Change the advection scheme and set a wisp tolerance in fvSolutions:
 
 `advectionScheme isoAdvection_wispCorrParallel;`
 
-`wispTol         1e-3;`
+`wispTol         1e-5;`
 
 For an example please refer to test case 03.
 Note: the wisp correction is currently only implemented for the interFlow solver.
