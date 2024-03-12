@@ -584,17 +584,16 @@ void Foam::advection::isoAdvection_wispCorrParallel::applyBruteForceBounding()
     scalar wispTol = modelDict().lookupOrDefault<scalar>("wispTol", 0); 
     volScalarField alpha1_w = alpha1_;// alpha field without wisps
 
-	// initialize wisp field als false
-	isWisp_.resize(mesh_.nCells());
-	isWisp_ = false;
+    // initialize wisp field als false
+    isWisp_.resize(mesh_.nCells());
+    isWisp_ = false;
 
     scalar nWisps = 0;
 
     if (wispTol > 0)
     {
 
-		// ------- 1. wisp correction in phase 1
-		// serial wisp correction
+	// serial wisp correction
         forAll(alpha1_, cellI)
             {
                 if (alpha1_[cellI] > (1.0 - wispTol))
@@ -615,7 +614,7 @@ void Foam::advection::isoAdvection_wispCorrParallel::applyBruteForceBounding()
             }
 
 
-		// parallel correction
+	// parallel correction
     	// Set wisp flags accordingly at process boundaries.
     	const auto& alphaBoundary = alpha1_.boundaryField(); 
     	const auto& own = mesh_.faceOwner(); 
@@ -646,80 +645,18 @@ void Foam::advection::isoAdvection_wispCorrParallel::applyBruteForceBounding()
     	        }
     	    }
 
-		}
+	}
 
-		forAll(alpha1_, cellI)
+	// collect wisps
+	forAll(alpha1_, cellI)
+	{
+		// check if it is indeed a wisp and add to nWisp
+		if (isWisp_[cellI] == true)
 		{
-			// check if it is indeed a wisp and add to nWisp
-			if (isWisp_[cellI] == true)
-			{
-			    nWisps =  nWisps + 1;
-				alpha1_[cellI] = 1.0;
-			}
+		    nWisps =  nWisps + 1;
+			alpha1_[cellI] = 1.0;
 		}
-
-		// ------- 2. wisp correction in phase 2
-		// serial wisp correction
-        forAll(alpha1_, cellI)
-            {
-                if (alpha1_[cellI] < (wispTol))
-                    {
-                        // set cell as wisp candidate
-						isWisp_[cellI] = true;
-   
-						// loop over neighbors of wisp candidate 
-                        const labelList& neighbour = mesh_.cellCells()[cellI];
-                        forAll(neighbour,i)
-                        {
-                            if (alpha1_[i] > (1 - snapAlphaTol) ) // if cell has full neighbor --> no wisp
-                            {
-								isWisp_[cellI] = false;
-                            }   
-                        }
-                    }
-            }
-
-
-		// parallel correction
-    	// Set wisp flags accordingly at process boundaries.
-    	forAll(alphaBoundary, patchI)
-    	{   
-    	    const auto& alphaFvPatch = alphaBoundary[patchI].patch();
-
-    	    if (isA<processorFvPatch>(alphaFvPatch))
-    	    {
-    	        // Get the neighbor alpha field. 
-    	        const auto& alphaFvPatchField = alphaBoundary[patchI]; 
-    	        const auto alphaNeiTmp = alphaFvPatchField.patchNeighbourField(); 
-    	        const scalarField& alphaNei = alphaNeiTmp();
-
-    	        forAll(alphaFvPatchField,faceI)
-    	        {
-    	            const label faceG = alphaFvPatch.start() + faceI; 
-    	            // If a cell on the process boundary is marked as a wisp cell
-    	            if (isWisp_[own[faceG]])
-    	            {
-    	                // But the adjacent cell across the process boundary is full
-    	                if (alphaNei[faceI] > (1 - snapAlphaTol))
-						{
-    	                    // Then it is not a wisp cell.
-    	                    isWisp_[own[faceG]] = false; 
-						}
-    	            }
-    	        }
-    	    }
-
-		}
-
-		forAll(alpha1_, cellI)
-		{
-			// check if it is indeed a wisp and add to nWisp
-			if (isWisp_[cellI] == true)
-			{
-			    nWisps =  nWisps + 1;
-				alpha1_[cellI] = 0.0;
-			}
-		}
+	}
 
         alpha1Changed = true;
     }   
