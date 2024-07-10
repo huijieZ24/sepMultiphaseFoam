@@ -1,6 +1,6 @@
 # Artificial Viscosity / Wisp Correction for OpenFOAM
 
-This branch contains the implementations and test cases discussed in the publication "Stabilizing the unstructured Volume-of-Fluid method for capillary flows in micro-structures using artificial viscosity" [(Preprint on ArXiV)](https://arxiv.org/abs/2306.11532).
+This branch contains the implementations and test cases discussed in the publication "Stabilizing the unstructured Volume-of-Fluid method for capillary flows in micro-structures using artificial viscosity" [(Publication on SpringerLink](https://link.springer.com/article/10.1007/s42757-023-0181-y), [Preprint on ArXiV)](https://arxiv.org/abs/2306.11532).
 
 Based on OpenFOAM-v2212 + TwoPhaseFlow-of2206.
 Also tested with OpenFOAM-v2112 + TwoPhaseFlow-of2112.
@@ -21,7 +21,7 @@ Note: the wisp correction is currently only implemented for the interFlow solver
 
 For the test cases of the oscillating wave and translating droplet, refer to https://github.com/boschresearch/sepMultiphaseFoam/tree/publications/ST-VoF-benchmark. 
 
-For more details refer to our [paper](https://arxiv.org/abs/2306.11532).
+For more details refer to our [paper](https://link.springer.com/article/10.1007/s42757-023-0181-y).
 
 ## Installation
 Source your OpenFOAM environment with `source ~/OpenFOAM-v2212/etc/bashrc` .
@@ -51,7 +51,7 @@ Change the advection scheme and set a wisp tolerance in fvSolutions:
 
 `advectionScheme isoAdvection_wispCorrParallel;`
 
-`wispTol         1e-3;`
+`wispTol         1e-5;`
 
 For an example please refer to test case 03.
 Note: the wisp correction is currently only implemented for the interFlow solver.
