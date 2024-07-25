@@ -1,0 +1,61 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  v2212
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   0.001;
+
+vertices
+(
+    (-0.1      -0.1    -0.5)
+    ( 19.9      -0.1    -0.5)
+    ( 19.9       2.9    -0.5)
+    (-0.1       2.9    -0.5)
+    (-0.1      -0.1     0.7  )
+    ( 19.9      -0.1     0.7  )
+    ( 19.9       2.9     0.7  )
+    (-0.1       2.9     0.7  )
+);
+
+nx #calc "30*20"; 
+ny #calc "30*3"; 
+nz #calc "30*1.2"; 
+
+blocks 
+(
+    hex (0 1 2 3 4 5 6 7) ($nx $ny $nz) simpleGrading (1 1 1)
+
+    //hex (0 1 2 3 4 5 6 7) (1200 600 240) simpleGrading (1 1 1) //   5e-6 m, 200 cells / mm, 173 M cells - not possible
+    //hex (0 1 2 3 4 5 6 7) (900  450 180) simpleGrading (1 1 1) // 6.7e-6 m, 150 cells / mm,  72  M cells
+    //hex (0 1 2 3 4 5 6 7) (600  300 120) simpleGrading (1 1 1) //  10e-6 m, 100 cells / mm, 22  M cells
+    //hex (0 1 2 3 4 5 6 7) (300  150  60) simpleGrading (1 1 1) //  20e-6 m,  50 cells /mm, 2.7 M cells
+    //hex (0 1 2 3 4 5 6 7) (300  150  60) simpleGrading (1 1 1) //  33e-6 m,  30 cells /mm, 0.8 M cells
+    //hex (0 1 2 3 4 5 6 7) (150   75  30) simpleGrading (1 1 1) //  40e-6 m,  25 cells /mm, 0.3 M cells
+);
+
+edges
+(
+);
+
+boundary
+(
+    
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
+

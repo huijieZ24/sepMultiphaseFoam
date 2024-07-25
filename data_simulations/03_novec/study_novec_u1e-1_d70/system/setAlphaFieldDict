@@ -1,0 +1,71 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setAlphaFieldDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+field           alpha.dispersed;
+
+		// contact angle initialization for front and back wall
+
+
+		// hydrophilic walls
+		
+		// calc geom parameters
+		angleTop_deg        45; // if initialization in z direction is used, use symmetric CA for front and back
+		angleBot_deg        45;
+		width               0.002; // is already in meter
+		xpos                #calc "$width/4"; // LN TODO check
+		
+		// calc angle in radiant, make sure it is below 90 deg
+		// since 90 deg does not work (cos(90deg)=0)
+		// also change angle >90deg to angle <90deg for circle computation
+		angleTop #calc "min(89.9, $angleTop_deg) / 180. * 3.1415927";
+		angleBot #calc "min(89.9, $angleBot_deg) / 180. * 3.1415927";
+		
+		r 		#calc "$width / (cos($angleTop) + cos($angleBot))";
+		yCyl  	#calc "$r * cos($angleBot)";
+		xCyl	#calc "$r + $xpos";
+		
+		type            composedFunction;
+		mode            subtract;
+		
+		composedFunction
+		{
+		
+		     cylinder
+		     {
+		        type    cylinder;
+				radius	$r;
+				origin ($xCyl $yCyl 0.000000e+00); 
+				direction (0 0 1);
+				scale -1;
+		     }
+		
+		     plane
+		     {
+		        type    plane;
+				origin ($xCyl $yCyl 0.000000e+00); // same as cylinder
+				normal (-1 0 0);
+		     }
+		}
+		
+		
+		// ************************************************************************* //
+
+
+	
+
+	
+	

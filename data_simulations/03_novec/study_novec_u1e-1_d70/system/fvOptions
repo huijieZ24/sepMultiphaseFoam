@@ -1,0 +1,32 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+
+
+	artViscIntSource
+	{
+	    type            artificialViscousInterfaceForce;
+	    selectionMode   all;
+	    fields          (U);						// where source is applied (U)
+		method			constant;				// constant, raessi, curvature
+		value			0.0012431;				// only used for "constant" method
+		gradMethod		grad;			// grad, snGrad
+		nSmoothingSteps 0;
+		smoothingCoeff  0;
+
+	}
+

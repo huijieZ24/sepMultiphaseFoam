@@ -1,0 +1,173 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    location        "system";
+    object          controlDict;
+}
+
+application     interFlow-fP;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.048;
+
+deltaT          2.42427836114e-05;
+
+writeControl    runTime;
+
+writeInterval   0.002;
+
+purgeWrite      0; //3;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  no;
+
+maxCo           1;
+
+maxAlphaCo      0.2;
+
+maxDeltaT       1;
+
+maxCapillaryNum 1e+10;
+
+
+libs            ( "libfvOptionArtificialViscousInterfaceForce.so" 
+				  "libisoAdvection_wispCorr.so"
+				  "libcontactAngleHysteresisBoundaryConditions.so"	);
+
+functions
+{
+
+    surfaces
+    {
+        type surfaces;
+        libs (geometricVoF sampling);
+        writeControl writeTime;
+     
+        surfaceFormat vtp;
+        fields (alpha.dispersed);
+
+        interpolationScheme cellPoint;
+
+        surfaces
+        (   
+            interface_plic
+            {   
+                type        interface;
+                interpolate false;
+            }
+      
+            isoAlpha05
+            {
+                type     isoSurface;
+                isoField alpha.dispersed;
+                isoValue 0.5;
+                isoMethod topo;         // Iso-algorithm (cell/topo/point), default: topo
+                average false;          // cell values from averaged point values, default: false
+                simpleSubMesh true;
+                regularise true;
+                triangulate true;
+            }   
+        );
+    }
+
+    alphaVolume
+    {
+        enabled         true;
+        type            volFieldValue;
+        libs            ( "libfieldFunctionObjects.so" );
+        fields          ( alpha.dispersed );
+        writeFields     no;
+        writeControl    writeTime;
+        regionType      all;
+        operation       volIntegrate;
+        log             true;
+    }
+
+    components1
+    {
+        type            components;
+        libs            ( fieldFunctionObjects );
+        field           U;
+        enabled         true;
+        executeControl  timeStep;
+        executeInterval 1;
+        writeControl    timeStep;
+        writeInterval   100000;
+    }
+
+    minMaxU
+    {
+        type            fieldMinMax;
+        libs            ( fieldFunctionObjects );
+        writeToFile     yes;
+        log             no;
+        location        no;
+        mode            component;
+        fields          ( Ux Uy Uz );
+    }
+	
+    interfaceHeight1
+    {
+        type            interfaceHeight;
+        libs            ( fieldFunctionObjects );
+        locations       ( 
+
+							(0 4.5e-06 4.5e-06)
+							(0 4.5e-06 0.000225)
+							(0 4.5e-06 0.0004455)
+							
+							(0 0.0001 4.5e-06)
+							(0 0.0001 0.000225)
+							(0 0.0001 0.0004455)
+							
+							(0 0.0004 4.5e-06)
+							(0 0.0004 0.000225)
+							(0 0.0004 0.0004455)
+							
+							(0 0.0007 4.5e-06)
+							(0 0.0007 0.000225)
+							(0 0.0007 0.0004455)
+							
+							(0 0.001 4.5e-06)
+							(0 0.001 0.000225)
+							(0 0.001 0.0004455)
+							
+							
+
+						);
+        alpha           alpha.dispersed;
+        liquid          true;
+        direction       ( -1 0 0 );
+        interpolationScheme cellPoint;
+        writePrecision  8;
+    }
+}
+
+
+// ************************************************************************* //

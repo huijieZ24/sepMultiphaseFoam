@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       pointScalarField;
+    location    "0";
+    object      pointLevel;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    bottom
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_0
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_1
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_3
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_4
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_6
+    {
+        type            calculated;
+    }
+    array_cavity_bottom_7
+    {
+        type            calculated;
+    }
+    array_cavity_wall_0
+    {
+        type            calculated;
+    }
+    array_cavity_wall_1
+    {
+        type            calculated;
+    }
+    array_cavity_wall_3
+    {
+        type            calculated;
+    }
+    array_cavity_wall_4
+    {
+        type            calculated;
+    }
+    array_cavity_wall_6
+    {
+        type            calculated;
+    }
+    array_cavity_wall_7
+    {
+        type            calculated;
+    }
+    front
+    {
+        type            calculated;
+    }
+    inlet
+    {
+        type            calculated;
+    }
+    outlet
+    {
+        type            calculated;
+    }
+    top
+    {
+        type            calculated;
+    }
+    symmetryPlane
+    {
+        type            calculated;
+    }
+}
+
+
+// ************************************************************************* //

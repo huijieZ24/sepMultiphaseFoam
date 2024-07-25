@@ -1,0 +1,148 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+18
+(
+    bottom
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          3636;
+        startFace       157908;
+    }
+    array_cavity_bottom_0
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          112;
+        startFace       161544;
+    }
+    array_cavity_bottom_1
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          56;
+        startFace       161656;
+    }
+    array_cavity_bottom_3
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          112;
+        startFace       161712;
+    }
+    array_cavity_bottom_4
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          56;
+        startFace       161824;
+    }
+    array_cavity_bottom_6
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          112;
+        startFace       161880;
+    }
+    array_cavity_bottom_7
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          56;
+        startFace       161992;
+    }
+    array_cavity_wall_0
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          96;
+        startFace       162048;
+    }
+    array_cavity_wall_1
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          48;
+        startFace       162144;
+    }
+    array_cavity_wall_3
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          96;
+        startFace       162192;
+    }
+    array_cavity_wall_4
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          48;
+        startFace       162288;
+    }
+    array_cavity_wall_6
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          96;
+        startFace       162336;
+    }
+    array_cavity_wall_7
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          48;
+        startFace       162432;
+    }
+    front
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1794;
+        startFace       162480;
+    }
+    inlet
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          390;
+        startFace       164274;
+    }
+    outlet
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          390;
+        startFace       164664;
+    }
+    top
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          4140;
+        startFace       165054;
+    }
+    symmetryPlane
+    {
+        type            patch;
+        nFaces          1866;
+        startFace       169194;
+    }
+)
+
+// ************************************************************************* //

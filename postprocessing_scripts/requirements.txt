@@ -1,0 +1,7 @@
+numpy==1.26.0
+matplotlib==3.7.2
+pandas==2.1.1
+opencv-python==4.8.0.76
+scikit-learn==1.2.2
+jupyterlab==3.6.3
+openpyxl==3.0.10
