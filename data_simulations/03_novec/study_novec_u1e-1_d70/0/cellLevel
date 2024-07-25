@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0";
+    object      cellLevel;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    bottom
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_0
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_1
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_3
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_4
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_6
+    {
+        type            zeroGradient;
+    }
+    array_cavity_bottom_7
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_0
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_1
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_3
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_4
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_6
+    {
+        type            zeroGradient;
+    }
+    array_cavity_wall_7
+    {
+        type            zeroGradient;
+    }
+    front
+    {
+        type            zeroGradient;
+    }
+    inlet
+    {
+        type            zeroGradient;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    top
+    {
+        type            zeroGradient;
+    }
+    symmetryPlane
+    {
+        type            zeroGradient;
+    }
+}
+
+
+// ************************************************************************* //
