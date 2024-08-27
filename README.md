@@ -1,6 +1,6 @@
 # Data and Code for Publication "Fluid penetration and wetting characteristics in T-shaped microchannels"
 
-This branch contains the data and the jupyter notebooks to reproduce the results in the publication "Fluid penetration and wetting characteristics in T-shaped microchannels" ([Preprint on arXiv](LINK)).
+This branch contains the data and the jupyter notebooks to reproduce the results in the publication "Fluid penetration and wetting characteristics in T-shaped microchannels" ([Preprint on arXiv](https://arxiv.org/abs/2408.14083)).
 
 ## Contents
 
